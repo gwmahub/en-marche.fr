@@ -1,11 +1,11 @@
-FROM ubuntu:xenial-20210429
+FROM ubuntu:20.04
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
     DEBIAN_FRONTEND="noninteractive" \
-    NODE_VERSION=10.20.1 \
+    NODE_VERSION=14.17.0 \
     GOSU_VERSION=1.11 \
     PHP_SECURITY_CHECHER_VERSION=1.0.0 \
     COMPOSER_ALLOW_SUPERUSER=1
@@ -68,7 +68,7 @@ RUN apt-get update -q && \
     curl -L -o /tmp/nodejs.tar.gz https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz && \
     tar xfvz /tmp/nodejs.tar.gz -C /usr/local --strip-components=1 && \
     rm -f /tmp/nodejs.tar.gz && \
-    npm install yarn -g && \
+    npm install pnpm -g && \
     # Install Symfony security checker
     curl -L https://github.com/fabpot/local-php-security-checker/releases/download/v${PHP_SECURITY_CHECHER_VERSION}/local-php-security-checker_${PHP_SECURITY_CHECHER_VERSION}_linux_$(dpkg --print-architecture) --output /usr/local/bin/local-php-security-checker && \
     chmod +x /usr/local/bin/local-php-security-checker && \

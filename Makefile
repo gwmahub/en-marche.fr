@@ -101,16 +101,16 @@ db-validate: vendor wait-for-db                                                 
 ##---------------------------------------------------------------------------
 
 watch: node_modules                                                                                    ## Watch the assets and build their development version on change
-	$(EXEC) yarn watch
+	$(EXEC) pnpm watch
 
 watch-mac:
-	yarn watch
+	pnpm watch
 
 assets: node_modules                                                                                   ## Build the development version of the assets
-	$(EXEC) yarn build-dev
+	$(EXEC) pnpm build-dev
 
 assets-prod: node_modules                                                                              ## Build the production version of the assets
-	$(EXEC) yarn build-prod
+	$(EXEC) pnpm build-prod
 
 ##
 ## Tests
@@ -153,7 +153,7 @@ tfp-db: wait-for-db                                                             
 	$(CONSOLE) doctrine:fixtures:load --env=test -n
 
 tj: node_modules                                                                                       ## Run the Javascript tests
-	$(EXEC) yarn test
+	$(EXEC) pnpm test
 
 lint: ls lj phpcs                                                                                ## Run lint on Twig, YAML, PHP and Javascript files
 
@@ -169,10 +169,10 @@ lc:
 	$(CONSOLE) lint:container
 
 lj: node_modules                                                                                       ## Lint the Javascript to follow the convention
-	$(EXEC) yarn lint
+	$(EXEC) pnpm lint
 
 ljfix: node_modules                                                                                    ## Lint and try to fix the Javascript to follow the convention
-	$(EXEC) yarn lint -- --fix
+	$(EXEC) pnpm lint -- --fix
 
 phpcs: vendor                                                                                          ## Lint PHP code
 	$(PHPCSFIXER) fix --diff --dry-run --no-interaction -v
@@ -227,18 +227,18 @@ vendor/autoload.php: composer.lock
 composer.lock: composer.json
 	@echo composer.lock is not up to date.
 
-node_modules: yarn.lock
-	$(EXEC) yarn install
+node_modules: pnpm-lock.yaml
+	$(EXEC) pnpm install
 
-yarn.lock: package.json
-	@echo yarn.lock is not up to date.
+pnpm-lock.yaml: package.json
+	@echo pnpm-lock.yaml is not up to date.
 
 public/built: front node_modules
-	$(EXEC) yarn build-dev
+	$(EXEC) pnpm build-dev
 
 web-built-mac:
-	yarn install
-	yarn build-dev
+	pnpm install
+	pnpm build-dev
 
 config/packages/assets_version.yaml: node_modules
-	 $(EXEC) yarn build-prod
+	 $(EXEC) pnpm build-prod

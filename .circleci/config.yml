@@ -71,8 +71,8 @@ jobs:
                   key: composer-{{ .Environment.CACHE_VERSION }}-{{ checksum "composer.lock" }}
             - save_cache:
                   paths:
-                      - ./node_modules
-                  key: npm-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+                      - ./.pnpm-store
+                  key: npm-{{ .Environment.CACHE_VERSION }}-{{ checksum "pnpm-lock.yaml" }}
 
             - persist_to_workspace:
                   root: ./
