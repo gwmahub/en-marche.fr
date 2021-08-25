@@ -41,6 +41,9 @@ class AdherentMessageControllerTest extends AbstractWebCaseTest
         );
 
         $response = $this->client->getResponse();
+        $data = json_decode($response->getContent(), true);
+        dump($data);
+
         $this->isSuccessful($response);
 
         $data = json_decode($response->getContent(), true);

@@ -36,6 +36,7 @@ class AdherentMessageDenormalizer implements DenormalizerInterface, Denormalizer
         unset($data['type']);
 
         $context[self::ADHERENT_MESSAGE_DENORMALIZER_ALREADY_CALLED] = true;
+        $context['resource_class'] = $messageClass;
 
         /** @var AdherentMessageInterface $message */
         $message = $this->denormalizer->denormalize($data, $messageClass, $format, $context);

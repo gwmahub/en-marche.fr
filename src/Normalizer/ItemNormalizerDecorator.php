@@ -30,9 +30,9 @@ class ItemNormalizerDecorator implements NormalizerInterface, DenormalizerInterf
         return $this->decorated->denormalize($data, $class, $format, $context);
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null, array $context = [])
     {
-        return $this->decorated->supportsDenormalization($data, $type, $format);
+        return $this->decorated->supportsDenormalization($data, $type, $format, $context);
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -42,9 +42,9 @@ class ItemNormalizerDecorator implements NormalizerInterface, DenormalizerInterf
         return $this->decorated->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = [])
     {
-        return $this->decorated->supportsNormalization($data, $format);
+        return $this->decorated->supportsNormalization($data, $format, $context);
     }
 
     public function setSerializer(SerializerInterface $serializer)
